@@ -1,6 +1,11 @@
 require "libui"
+require_relative "solve"
 
 UI = LibUI
+
+$ans = Array.new(9) do
+  Array.new(9)
+end
 
 def main()
   UI.init
@@ -19,9 +24,10 @@ def main()
   end
 
   problem_label = UI.new_label("問題")
-  problem_label = UI.new_button("実行")
+  action_button = UI.new_button("実行")
 
   UI.box_append(hbox, problem_label, 0)
+  UI.box_append(hbox, action_button, 0)
 
   button = Array.new(9) do
     Array.new(9)
@@ -44,8 +50,22 @@ def main()
     j += 1
   end
 
-  #whilewhileでchangeに送る。
-  #i,j,中身を送る。nullのときは0を送る。
+  UI.button_on_clicked(action_button) do
+    i = 0
+    while i < 9
+      j = 0
+      while j < 9
+        if UI.multiline_entry_text(button[i][j]).to_s.empty?
+          $ans[i][j] = 0
+        else
+          $ans[i][j] = UI.multiline_entry_text(button[i][j]).to_s
+        end
+        j += 1
+      end
+      i += 1
+    end
+    solve
+  end
 
   UI.control_show(main_window)
   UI.main
@@ -53,8 +73,3 @@ def main()
 end
 
 main()
-
-def change
-    #なんか配列に送る。
-    #配列をsolveに送って全部やる。
-end
