@@ -7,6 +7,7 @@ def init
         j = 0
         while j < 9
             $canenter[[i,j]] = []
+            $ans[i][j] = $ans[i][j].to_i
             j += 1
         end
         i += 1
@@ -14,18 +15,19 @@ def init
 
 end
 
+def enit 
+    i = 0
+    while i < 9
+        j = 0
+        while j < 9
+            $ans[i][j] = $ans[i][j].to_s
+            j += 1
+        end
+        i += 1
+    end
 
-$ans = [
-    [1,7,0,0,0,0,0,3,0],
-    [0,0,8,0,0,0,2,6,0],
-    [0,0,0,0,0,0,0,0,4],
-    [0,0,0,0,0,0,4,0,0],
-    [0,2,4,9,0,8,1,0,7],
-    [0,0,0,1,0,0,0,8,9],
-    [0,0,0,0,0,0,0,0,0],
-    [0,3,0,0,2,5,0,0,0],
-    [0,5,0,7,0,0,0,0,0]
-]
+end
+
 
 def enter(i, j)
     #tate
@@ -199,7 +201,5 @@ def solve
             break
         end
     end
-    p $ans
+    enit()
 end
-
-solve()
